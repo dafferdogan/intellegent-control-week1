@@ -1,0 +1,72 @@
+Nama : Muhammad Daffa Adyatma Prasojo
+NIM : 224308038
+Kelas : TKA-6B
+Akun Github (Tautan) : https://github.com/dafferdogan 
+Student Lab Assistant :Mbak Dwi
+
+Codingan :
+import cv2 
+import numpy as np 
+#inisialisasi kamera
+cap=cv2.VideoCapture (0)
+while True:
+ _,frame=cap.read()
+ hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
+
+ #Rentang warna merah dalam HSV
+ lower_red = np.array([0,120,70])
+ upper_red = np.array([10,255,255])
+
+ #Masking untuk mendeteksi warna merah 
+ mask=cv2.inRange(hsv,lower_red,upper_red)
+ result=cv2.bitwise_and(frame,frame,mask=mask)
+ 
+ #Menampilkan hasil
+ cv2.imshow("Frame",frame)
+ cv2.imshow("Mask",mask)
+ cv2.imshow("Result",result)
+
+ if cv2.waitKey(1) & 0xFF== ord('q'):
+   
+    break
+cap.release()
+cv2.destroyAllWindows()
+
+
+Analisi Hasil:
+1. Apa yang terjadi saat objek berwarna merah muncul di kamera?
+   Saat codingan di-run menampilkan 3 gambar yaitu  bagian frame menampilkan gambar asli dari kamera. bagian result menampilkan objek yang tidak berwarna merah menjadi gelap, saat terdapat objek yang berwarna merah maka bagian yang berwarna merah menjadi terlihat. Bagian mask menampilkan objek yang tidak berwarna merah menjadi gelap, saat terdapat objek yang berwarna merah maka bagian yang berwarna merah menjadi berwarna putih.
+2. Bagaimana sistem mendeteksi dan memfilter warna merah?
+   
+   Dengan mengimport library Open CV untuk pemrosesan gambar dan video untuk mengolah data gambar. Selanjutnya menyiapkan kamera dari kamera bawaan laptop/webcam.
+   
+   Dalam codingan diatas memiliki loop agar codingan berjalan, selanjutnya membaca frame dari kamera. Frame dari kamera di konversi dari BGR (Blue, Green Red) menjadi HSV(Hue Saturation Value).
+   
+   Menentukan batas atas dan bawah dari warna merah agar dapat menentukan jenis warna dan tingkat kecerahan warna.
+   
+   Untuk membaca warna merah yang terdapat dalam rentang warna merah mask dan result. 
+   
+   Untuk menampilkan frame asli, menampilkan mask dan menampilkan result dari kamera. 
+   
+   Jika  ingin menghentikan  programnya dengan menekan tombol ‘q’, dan mematikan kamera serta menutup jendela windows. 
+    Dengan menampilkan gambar dari kamera menjadi gelap, jika objek berwarna merah maka gambar dari kamera menjadi terang. Karena dalam kamera  menampilkan format BGR setalah itu dalam codingan terdapat konversi dari BGR ke dalam HSV atau Hue Saturation Value. Selanjutnya terdapat rentang warna merah untuk mendeteksi tingkat kecerahan dari warna merah dari warna merah gelap menuju warna merah terang, karena warna merah memiliki beberapa tingkat kecerahan. Fungsi mask dan result digunakan untuk menampilkan berdasarkan tingkat kecerahan pixel jika terdapat objek berwarna merah akan menjadi terang dan jika tidak ada objek berwarna merah akan menjadi gelap. 
+3. Bagaimana metode ini dapat diterapkan dalam intelligent control systems? 
+   Sistem ini menggunakan OpenCV untuk pemrosesan video dan deteksi objek yang menampilkan gambar asli dari kamera yang dapat mendeteksi objek berwarna sesuai warna diinginkan. Sistem pendeteksi objek ini bisa digunakan dalam bidang pertanian yaitu tingkat kematangan buah. 
+   
+Diskusi 
+1. Bagaimana AI dapat meningkatkan sistem kontrol berbasis Computer Vision?
+   Dalam AI terdapat proses pengolahan data yang dikembangkan dalam Computer vision untuk memahami dan menganalisis gambar atau video, yang dapat digunakan untuk mendeteksi atau mentracking suatu objek.
+2. Apa kelebihan dan kekurangan metode deteksi objek berbasis warna?
+Kelebihan : 
+a. Cepat dalam pemrosesan warna yang dapat digunakan di semua bidang teknologi.
+b. Murah dan mudah dipahami bagi pemula.
+c. Tidak membutuhkan dataset terlalu besar.
+Kekurangan:
+a. Jika terdapat noise dalam kamera, maka sulit untuk mendeteksi warna
+b. Tergantung pada kondisi cahaya, jika kondisi gelap maka sulit untuk mendeteksi warna.
+3. Bagaimana cara meningkatkan akurasi sistem deteksi objek?
+a. Dengan mengubah dari RGB ke dalam HSV karena HSV dapat focus menentukan warna tanpa dipengaruhi oleh kecerahan dan menentukan rentang warna HSV.
+b. Dengan menambahkan codingan untuk mengurangi noise dari kamera
+c. Dengan menambahkan bounding box untuk menentukan batas objek yang dideteksi.
+
+
